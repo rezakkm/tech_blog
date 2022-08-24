@@ -1,1 +1,1 @@
-# tech_blog
+# techapp
