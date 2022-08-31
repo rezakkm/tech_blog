@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tech_blog/my_colors.dart';
-import 'package:tech_blog/splash_screen.dart';
-import 'package:tech_blog/gen/assets.gen.dart';
+import 'package:tech_blog/view/splash_screen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: solidColors.statusBar,
+    statusBarColor: SolidColors.statusBar,
     statusBarIconBrightness: Brightness.dark,
-    systemNavigationBarColor: solidColors.navigationBar,
+    systemNavigationBarColor: SolidColors.navigationBar,
     systemNavigationBarIconBrightness: Brightness.dark,
   ));
   runApp(const MyApp());
@@ -32,30 +31,76 @@ class MyApp extends StatelessWidget {
         ],
         title: 'Flutter Demo',
         theme: ThemeData(
-            fontFamily: 'dana',
-            textTheme: const TextTheme(
-              headline1: TextStyle(
-                  fontFamily: 'dana',
-                  fontSize: 16,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w700),
-              headline2: TextStyle(
-                  fontFamily: 'dana',
-                  fontSize: 16,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700),
-              bodyText1: TextStyle(
-                  fontFamily: 'dana',
-                  fontSize: 14,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w300),
-              bodyText2: TextStyle(
-                  fontFamily: 'dana',
-                  fontSize: 14,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w300),
-            )),
+          inputDecorationTheme: const InputDecorationTheme(
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+                borderSide: BorderSide(width: 1.5)),
+          ),
+          fontFamily: 'dana',
+          textTheme: const TextTheme(
+            headline1: TextStyle(
+                fontFamily: 'dana',
+                fontSize: 15,
+                color: SolidColors.textTitleHomePoster,
+                fontWeight: FontWeight.w700),
+            headline2: TextStyle(
+                fontFamily: 'dana',
+                fontSize: 14,
+                color: SolidColors.textSUbitleHomePoster,
+                fontWeight: FontWeight.w700),
+            headline5: TextStyle(
+                fontFamily: 'dana',
+                fontSize: 14,
+                color: SolidColors.primryColor,
+                fontWeight: FontWeight.w700),
+            headline3: TextStyle(
+                fontFamily: 'dana',
+                fontSize: 10,
+                color: SolidColors.textTitle,
+                fontWeight: FontWeight.w300),
+            bodyText1: TextStyle(
+                fontFamily: 'dana',
+                fontSize: 14,
+                color: SolidColors.textSUbitleHomePoster,
+                fontWeight: FontWeight.w300),
+            bodyText2: TextStyle(
+                fontFamily: 'dana',
+                fontSize: 14,
+                color: SolidColors.hashtagText,
+                fontWeight: FontWeight.w300),
+            subtitle1: TextStyle(
+                fontFamily: 'dana',
+                fontSize: 12,
+                color: SolidColors.seemore,
+                fontWeight: FontWeight.w300),
+            headline4: TextStyle(
+                fontFamily: 'dana',
+                fontSize: 15,
+                color: SolidColors.textTitle,
+                fontWeight: FontWeight.w700),
+            headline6: TextStyle(
+                fontFamily: 'dana',
+                fontSize: 13,
+                color: SolidColors.textTitle,
+                fontWeight: FontWeight.w700),
+            subtitle2: TextStyle(
+                fontFamily: 'dana',
+                fontSize: 14,
+                color: SolidColors.welcomeText,
+                fontWeight: FontWeight.w700),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ButtonStyle(
+            animationDuration: const Duration(milliseconds: 100),
+            backgroundColor: MaterialStateProperty.resolveWith(((states) {
+              if (states.contains(MaterialState.pressed)) {
+                return SolidColors.seemore;
+              }
+              return SolidColors.primryColor;
+            })),
+          )),
+        ),
         debugShowCheckedModeBanner: false,
-        home: SplashScreen());
+        home: const SplashScreen());
   }
 }
