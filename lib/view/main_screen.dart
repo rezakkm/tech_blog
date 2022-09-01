@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 
 import 'package:tech_blog/my_colors.dart';
+import 'package:tech_blog/my_component.dart';
 
 import 'package:tech_blog/view/home_screen.dart';
 import 'package:tech_blog/view/profile_screen.dart';
@@ -15,6 +16,8 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 
+final GlobalKey<ScaffoldState> _key = GlobalKey();
+
 class _MainScreenState extends State<MainScreen> {
   int selectedPageIndex = 0;
   @override
@@ -25,8 +28,65 @@ class _MainScreenState extends State<MainScreen> {
 
     return SafeArea(
       child: Scaffold(
+        key: _key,
+        drawer: Drawer(
+            backgroundColor: SolidColors.scafoldBg,
+            child: ListView(
+              children: [
+                DrawerHeader(
+                    child: Image.asset(
+                  Assets.images.logo.path,
+                  scale: 2.5,
+                )),
+                TechDivider(bodyMargin: bodyMargin / 2),
+                ListTile(
+                  title: Padding(
+                    padding: EdgeInsets.only(right: bodyMargin / 2),
+                    child: Text(
+                      'پروفایل کابری',
+                      style: textTheme.headline6,
+                    ),
+                  ),
+                  onTap: () {},
+                ),
+                TechDivider(bodyMargin: bodyMargin / 2),
+                ListTile(
+                  title: Padding(
+                    padding: EdgeInsets.only(right: bodyMargin / 2),
+                    child: Text(
+                      'درباره تک بلاگ',
+                      style: textTheme.headline6,
+                    ),
+                  ),
+                  onTap: () {},
+                ),
+                TechDivider(bodyMargin: bodyMargin / 2),
+                ListTile(
+                  title: Padding(
+                    padding: EdgeInsets.only(right: bodyMargin / 2),
+                    child: Text(
+                      'اشتراک گذاری تک بلاگ',
+                      style: textTheme.headline6,
+                    ),
+                  ),
+                  onTap: () {},
+                ),
+                TechDivider(bodyMargin: bodyMargin / 2),
+                ListTile(
+                  title: Padding(
+                    padding: EdgeInsets.only(right: bodyMargin / 2),
+                    child: Text(
+                      'تک بلاگ در گیت هاب',
+                      style: textTheme.headline6,
+                    ),
+                  ),
+                  onTap: () {},
+                ),
+              ],
+            )),
         backgroundColor: Colors.white,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           elevation: 0,
           backgroundColor: SolidColors.scafoldBg,
           title: Padding(
@@ -34,9 +94,14 @@ class _MainScreenState extends State<MainScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Icon(
-                  Icons.menu,
-                  color: Colors.black,
+                InkWell(
+                  onTap: () {
+                    _key.currentState!.openDrawer();
+                  },
+                  child: const Icon(
+                    Icons.menu,
+                    color: Colors.black,
+                  ),
                 ),
                 Image(
                   image: Image.asset(Assets.images.logo.path).image,

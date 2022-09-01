@@ -65,3 +65,44 @@ class SimpleOfTagList extends StatelessWidget {
     );
   }
 }
+
+class SimpleOfFavTag extends StatelessWidget {
+  const SimpleOfFavTag(
+      {Key? key,
+      required this.size,
+      required this.index,
+      required this.biuldList})
+      : super(key: key);
+
+  final Size size;
+  final int index;
+  final List biuldList;
+
+  @override
+  Widget build(BuildContext context) {
+    var texttheme = Theme.of(context).textTheme;
+    return Container(
+      height: size.height / 12.7,
+      decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          color: Color.fromARGB(255, 230, 230, 230)),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox.shrink(),
+            Text(
+              biuldList[index].title,
+              style: texttheme.headline3,
+            ),
+            const Icon(
+              Icons.remove_sharp,
+              color: Colors.grey,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

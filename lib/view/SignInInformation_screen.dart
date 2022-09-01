@@ -73,7 +73,10 @@ class _SignInInfoState extends State<SignInInfo> {
                           child: InkWell(
                               onTap: () {
                                 setState(() {
-                                  favariteTag.add(tagList[index]);
+                                  if (favariteTag.contains(tagList[index]) ==
+                                      false) {
+                                    favariteTag.add(tagList[index]);
+                                  }
                                 });
                               },
                               child: SimpleOfTagList(
@@ -104,7 +107,7 @@ class _SignInInfoState extends State<SignInInfo> {
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        childAspectRatio: 0.34,
+                        childAspectRatio: 0.33,
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 7,
                       ),
@@ -117,7 +120,7 @@ class _SignInInfoState extends State<SignInInfo> {
                                   favariteTag.remove(favariteTag[index]);
                                 });
                               },
-                              child: SimpleOfTagList(
+                              child: SimpleOfFavTag(
                                 size: size,
                                 index: index,
                                 biuldList: favariteTag,
@@ -129,11 +132,17 @@ class _SignInInfoState extends State<SignInInfo> {
               SizedBox(
                 height: size.height / 12,
               ),
-              ElevatedButton(
-                  onPressed: () {},
-                  child: const Text(
-                    '   ادامه   ',
-                  ))
+              ButtonTheme(
+                minWidth: size.width / 2.5,
+                height: size.height / 15,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        fixedSize: Size.fromWidth(size.width / 3)),
+                    onPressed: () {},
+                    child: const Text(
+                      '   ادامه   ',
+                    )),
+              )
             ],
           ),
         ),

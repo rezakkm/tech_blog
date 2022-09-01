@@ -223,7 +223,7 @@ class BlogListHomePage extends StatelessWidget {
                       blogList[index].title,
                       style: textTheme.headline3,
                       overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
+                      maxLines: 1,
                     ),
                   )
                 ],
