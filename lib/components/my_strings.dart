@@ -13,7 +13,7 @@ class MyStrings {
 
 برای ارسال مطلب و پادکست باید حتما 
 ثبت نام کنی  ''';
-  static const String SignInText = """تبریک میگم ، ایمیل با موفقیت تایید شد
+  static const String signInText = """تبریک میگم ، ایمیل با موفقیت تایید شد
 لطفا اطلاعات ثبت نام رو کامل کن """;
   static const String chooseCategory =
       'دسته بندی هایی که دوست داری رو انتخاب کن';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 
-import 'package:tech_blog/my_strings.dart';
+import 'package:tech_blog/components/my_strings.dart';
 import 'package:tech_blog/view/SignInInformation_screen.dart';
 import 'package:validators/validators.dart';
 
@@ -66,7 +66,7 @@ class RigesterIntro extends StatelessWidget {
 class EmailRigesterBottomSheet extends StatefulWidget {
   final String order;
   final String hint;
-  EmailRigesterBottomSheet({
+  const EmailRigesterBottomSheet({
     Key? key,
     required this.order,
     required this.hint,
@@ -167,7 +167,7 @@ class _EmailRigesterBottomSheetState extends State<EmailRigesterBottomSheet> {
 class CodeRigesterBottomSHeet extends StatelessWidget {
   final String order;
   final String hint;
-  CodeRigesterBottomSHeet({
+  const CodeRigesterBottomSHeet({
     Key? key,
     required this.order,
     required this.hint,

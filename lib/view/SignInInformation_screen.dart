@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/models/fake_data.dart';
-import 'package:tech_blog/my_component.dart';
-import 'package:tech_blog/my_strings.dart';
+import 'package:tech_blog/components/my_component.dart';
+import 'package:tech_blog/components/my_strings.dart';
 import '../gen/assets.gen.dart';
 
 class SignInInfo extends StatefulWidget {
@@ -38,7 +37,7 @@ class _SignInInfoState extends State<SignInInfo> {
               RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                    text: MyStrings.SignInText, style: texttheme.subtitle2),
+                    text: MyStrings.signInText, style: texttheme.subtitle2),
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(bodyMargin, 24, bodyMargin, 20),
