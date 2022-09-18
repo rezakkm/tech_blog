@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:tech_blog/components/my_strings.dart';
 
 import 'package:tech_blog/gen/assets.gen.dart';
 
@@ -9,17 +12,14 @@ import 'package:tech_blog/view/home_screen.dart';
 import 'package:tech_blog/view/profile_screen.dart';
 import 'package:tech_blog/view/rigester_intro.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
-
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
+import '../controller/home_screen_controller.dart';
 
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
-class _MainScreenState extends State<MainScreen> {
-  int selectedPageIndex = 0;
+class MainScreen extends StatelessWidget {
+  RxInt selectedPageIndex = 0.obs;
+
+  MainScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
@@ -69,7 +69,9 @@ class _MainScreenState extends State<MainScreen> {
                       style: textTheme.headline6,
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () async {
+                    await Share.share(MyStrings.shareTechBlog);
+                  },
                 ),
                 TechDivider(bodyMargin: bodyMargin / 2),
                 ListTile(
@@ -80,7 +82,9 @@ class _MainScreenState extends State<MainScreen> {
                       style: textTheme.headline6,
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    myUrlLauncher(MyStrings.launchGithubUrl);
+                  },
                 ),
               ],
             )),
@@ -118,23 +122,22 @@ class _MainScreenState extends State<MainScreen> {
         body: Stack(
           children: [
             // body
-            Positioned.fill(
-                child: IndexedStack(
-              index: selectedPageIndex,
-              children: [
-                HomeScreen(
-                    size: size, textTheme: textTheme, bodyMargin: bodyMargin),
-                ProfileScreen(
-                    size: size, textTheme: textTheme, bodyMargin: bodyMargin),
-              ],
-            )),
+            Positioned.fill(child: Obx(() {
+              return IndexedStack(
+                index: selectedPageIndex.value,
+                children: [
+                  HomeScreen(
+                      size: size, textTheme: textTheme, bodyMargin: bodyMargin),
+                  ProfileScreen(
+                      size: size, textTheme: textTheme, bodyMargin: bodyMargin),
+                ],
+              );
+            })),
             // navigation Bar
             NavigationBar(
                 size: size,
                 changeScreen: (int value) {
-                  setState(() {
-                    selectedPageIndex = value;
-                  });
+                  selectedPageIndex.value = value;
                 }),
           ],
         ),

@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../gen/assets.gen.dart';
 
 import 'my_colors.dart';
@@ -58,7 +62,7 @@ class SimpleOfTagList extends StatelessWidget {
             const SizedBox(
               width: 8,
             ),
-            Text(biuldList[index].title)
+            Obx(() => Text(biuldList[index].title))
           ],
         ),
       ),
@@ -105,4 +109,12 @@ class SimpleOfFavTag extends StatelessWidget {
       ),
     );
   }
+}
+
+myUrlLauncher(String url) async {
+  var uri = Uri.parse(url);
+  if (await canLaunchUrl(uri)) {
+    launchUrl(uri);
+  }
+  log('could not launch ${uri.toString()}');
 }

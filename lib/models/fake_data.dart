@@ -18,8 +18,7 @@ List<HashtagModel> tagList = [
   HashtagModel(title: 'فلاتر'),
   HashtagModel(title: 'فراگ'),
 ];
-List<HashtagModel> favariteTag = [];
-
+List<HashtagModel> favTagList = [];
 List<BlogModel> blogList = [
   BlogModel(
       id: 1,

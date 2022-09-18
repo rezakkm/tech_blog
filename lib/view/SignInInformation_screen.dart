@@ -72,9 +72,9 @@ class _SignInInfoState extends State<SignInInfo> {
                           child: InkWell(
                               onTap: () {
                                 setState(() {
-                                  if (favariteTag.contains(tagList[index]) ==
+                                  if (favTagList.contains(tagList[index]) ==
                                       false) {
-                                    favariteTag.add(tagList[index]);
+                                    favTagList.add(tagList[index]);
                                   }
                                 });
                               },
@@ -102,7 +102,7 @@ class _SignInInfoState extends State<SignInInfo> {
                   child: GridView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
-                      itemCount: favariteTag.length,
+                      itemCount: favTagList.length,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
@@ -116,13 +116,13 @@ class _SignInInfoState extends State<SignInInfo> {
                           child: InkWell(
                               onTap: () {
                                 setState(() {
-                                  favariteTag.remove(favariteTag[index]);
+                                  favTagList.remove(favTagList[index]);
                                 });
                               },
                               child: SimpleOfFavTag(
                                 size: size,
                                 index: index,
-                                biuldList: favariteTag,
+                                biuldList: favTagList,
                               )),
                         );
                       })),

@@ -1,4 +1,5 @@
 class MyStrings {
+  static const String launchGithubUrl = 'https://google.com';
   static const String viewHotestBlog = "مشاهده داغ ترین نوشته ها";
   static const String viewHotestPodasts = "مشاهده داغ ترین پادکست ها";
   static const String relatedArticle = "نوشته های مرتبط";
@@ -15,6 +16,10 @@ class MyStrings {
 ثبت نام کنی  ''';
   static const String signInText = """تبریک میگم ، ایمیل با موفقیت تایید شد
 لطفا اطلاعات ثبت نام رو کامل کن """;
+
+  static const String shareTechBlog = """
+من با تک بلاگ خیلی حال کردم، توهم نصبش کن
+""";
   static const String chooseCategory =
       'دسته بندی هایی که دوست داری رو انتخاب کن';
 }
