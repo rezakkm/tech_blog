@@ -1,8 +1,11 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:tech_blog/components/my_text_style.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../controller/home_screen_controller.dart';
 import '../gen/assets.gen.dart';
 
 import 'my_colors.dart';
@@ -27,16 +30,15 @@ class TechDivider extends StatelessWidget {
 }
 
 class SimpleOfTagList extends StatelessWidget {
-  const SimpleOfTagList(
-      {Key? key,
-      required this.size,
-      required this.index,
-      required this.biuldList})
-      : super(key: key);
+  HomeScreenController homeScreenController = Get.put(HomeScreenController());
+  SimpleOfTagList({
+    Key? key,
+    required this.size,
+    required this.index,
+  }) : super(key: key);
 
   final Size size;
   final int index;
-  final List biuldList;
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +54,9 @@ class SimpleOfTagList extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
         child: Row(
           children: [
+            SizedBox(
+              width: 5,
+            ),
             ImageIcon(
               Image.asset(
                 Assets.icons.hashtag.path,
@@ -60,9 +65,12 @@ class SimpleOfTagList extends StatelessWidget {
               size: 12,
             ),
             const SizedBox(
-              width: 8,
+              width: 6,
             ),
-            Obx(() => Text(biuldList[index].title))
+            Obx(() => Text(
+                  homeScreenController.tagList[index].title,
+                  style: tagFont,
+                ))
           ],
         ),
       ),
@@ -117,4 +125,43 @@ myUrlLauncher(String url) async {
     launchUrl(uri);
   }
   log('could not launch ${uri.toString()}');
+}
+
+AppBar primryAppBar(String title) {
+  return AppBar(
+    elevation: 0,
+    backgroundColor: Colors.transparent,
+    actions: [
+      Padding(
+        padding: const EdgeInsets.only(left: 32, top: 20),
+        child: Text(
+          title,
+          style: appBarText,
+        ),
+      )
+    ],
+    leading: Padding(
+      padding: const EdgeInsets.only(right: 16),
+      child: GestureDetector(
+        onTap: () {
+          Get.back();
+        },
+        child: Container(
+          height: 40,
+          width: 40,
+          decoration: BoxDecoration(
+              color: SolidColors.primryColor.withAlpha(180),
+              shape: BoxShape.circle),
+          child: const Icon(Icons.arrow_back_ios_rounded),
+        ),
+      ),
+    ),
+  );
+}
+
+Widget loading() {
+  return const SpinKitFadingCube(
+    color: SolidColors.primryColor,
+    size: 32,
+  );
 }

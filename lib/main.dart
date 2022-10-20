@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:tech_blog/components/my_colors.dart';
+
+import 'package:tech_blog/view/main/home_screen.dart';
+import 'package:tech_blog/view/main/main_screen.dart';
+import 'package:tech_blog/view/single_article_screen.dart';
 import 'package:tech_blog/view/splash_screen.dart';
+
+import 'view/article_list_screen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -20,15 +27,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('fa', ''), // persian, no country code
-        ],
+    return GetMaterialApp(
+        locale: const Locale('fa'),
         title: 'Flutter Demo',
         theme: ThemeData(
           inputDecorationTheme: const InputDecorationTheme(
@@ -88,6 +88,11 @@ class MyApp extends StatelessWidget {
                 fontSize: 14,
                 color: SolidColors.welcomeText,
                 fontWeight: FontWeight.w700),
+            overline: TextStyle(
+                fontFamily: 'dana',
+                fontSize: 12,
+                color: SolidColors.textTitle,
+                fontWeight: FontWeight.w300),
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(
               style: ButtonStyle(
@@ -101,6 +106,6 @@ class MyApp extends StatelessWidget {
           )),
         ),
         debugShowCheckedModeBanner: false,
-        home: const SplashScreen());
+        home: MainScreen());
   }
 }

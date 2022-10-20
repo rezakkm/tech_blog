@@ -2,17 +2,26 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:tech_blog/controller/article_list_controller.dart';
+import 'package:tech_blog/controller/article_single_controller.dart';
 import 'package:tech_blog/controller/home_screen_controller.dart';
 import 'package:tech_blog/services/dio_service.dart';
+import 'package:tech_blog/view/article_list_screen.dart';
 
-import '../gen/assets.gen.dart';
-import '../models/fake_data.dart';
-import '../components/my_colors.dart';
-import '../components/my_component.dart';
-import '../components/my_strings.dart';
+import '../../gen/assets.gen.dart';
+import '../../models/fake_data.dart';
+import '../../components/my_colors.dart';
+import '../../components/my_component.dart';
+import '../../components/my_strings.dart';
+import '../single_article_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreenController homeScreenController = Get.put(HomeScreenController());
+  ArticleListController articleListController =
+      Get.put(ArticleListController());
+  ArticleSingleController articleSingleController =
+      Get.put(ArticleSingleController());
+
   HomeScreen({
     Key? key,
     required this.size,
@@ -74,23 +83,28 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget seeMoreHottestBlog() {
-    return Padding(
-      padding: EdgeInsets.only(
-        bottom: 8,
-        right: bodyMargin,
-      ),
-      child: Row(
-        children: [
-          ImageIcon(
-              Image.asset(
-                Assets.icons.bluePen.path,
-              ).image,
-              color: SolidColors.seemore),
-          const SizedBox(
-            width: 6,
-          ),
-          Text(MyStrings.viewHotestBlog, style: textTheme.subtitle1)
-        ],
+    return GestureDetector(
+      onTap: () {
+        Get.to(() => const ArticleListScreen(title: 'لیست مقاله ها'));
+      },
+      child: Padding(
+        padding: EdgeInsets.only(
+          bottom: 8,
+          right: bodyMargin,
+        ),
+        child: Row(
+          children: [
+            ImageIcon(
+                Image.asset(
+                  Assets.icons.bluePen.path,
+                ).image,
+                color: SolidColors.seemore),
+            const SizedBox(
+              width: 6,
+            ),
+            Text(MyStrings.viewHotestBlog, style: textTheme.subtitle1)
+          ],
+        ),
       ),
     );
   }
@@ -104,34 +118,43 @@ class HomeScreen extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemBuilder: ((context, index) {
             // object tag list
-            return Padding(
-              padding:
-                  EdgeInsets.fromLTRB(8, 8, index == 0 ? bodyMargin : 8, 8),
-              child: Container(
-                height: size.height / 12.7,
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                    gradient: LinearGradient(
-                        colors: GradiantColors.hashtags,
-                        begin: Alignment.centerRight,
-                        end: Alignment.centerLeft)),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
-                  child: Row(
-                    children: [
-                      ImageIcon(
-                        Image.asset(
-                          Assets.icons.hashtag.path,
-                        ).image,
-                        color: Colors.white,
-                        size: 12,
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Text(homeScreenController.tagList[index].title,
-                          style: textTheme.bodyText1),
-                    ],
+            return GestureDetector(
+              onTap: () {
+                String catId = homeScreenController.tagList[index].id;
+                articleListController.getArticleListWithTagId(catId);
+
+                String title = homeScreenController.tagList[index].title;
+                Get.to(() => ArticleListScreen(title: title));
+              },
+              child: Padding(
+                padding:
+                    EdgeInsets.fromLTRB(8, 8, index == 0 ? bodyMargin : 8, 8),
+                child: Container(
+                  height: size.height / 12.7,
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                      gradient: LinearGradient(
+                          colors: GradiantColors.hashtags,
+                          begin: Alignment.centerRight,
+                          end: Alignment.centerLeft)),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
+                    child: Row(
+                      children: [
+                        ImageIcon(
+                          Image.asset(
+                            Assets.icons.hashtag.path,
+                          ).image,
+                          color: Colors.white,
+                          size: 12,
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Text(homeScreenController.tagList[index].title,
+                            style: textTheme.bodyText1),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -168,107 +191,113 @@ class HomeScreen extends StatelessWidget {
 // bug Ui while loading
   Widget bloglist() {
     return SizedBox(
-      height: size.height / 4.1,
-      child: Obx(() {
-        return ListView.builder(
+        height: size.height / 4.1,
+        child: ListView.builder(
             itemCount: homeScreenController.topVisitedList.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: ((context, index) {
               // blog horizinal list
-              return Padding(
-                padding:
-                    EdgeInsets.fromLTRB(16, 0, index == 0 ? bodyMargin : 16, 0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // poster blog
-                    Stack(
-                      children: [
-                        CachedNetworkImage(
-                          imageUrl:
-                              homeScreenController.topVisitedList[index].image,
-                          imageBuilder: (context, imageProvider) {
-                            return Container(
-                              width: size.width / 2.4,
-                              height: size.height / 5.53,
-                              decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(16)),
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover, image: imageProvider)),
-                              foregroundDecoration: const BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(16)),
-                                  gradient: LinearGradient(
-                                      colors: GradiantColors.blogPoster,
-                                      begin: Alignment.bottomCenter,
-                                      end: Alignment.center)),
-                            );
-                          },
-                          placeholder: (context, url) =>
-                              const SpinKitFadingCube(
-                            color: SolidColors.primryColor,
-                            size: 20,
-                          ),
-                          errorWidget: (context, url, error) => const Icon(
-                            Icons.image_not_supported_outlined,
-                            color: Colors.grey,
-                            size: 40,
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 8,
-                          left: 0,
-                          right: 0,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                homeScreenController
-                                    .topVisitedList[index].author,
-                                style: textTheme.bodyText1,
+              return GestureDetector(
+                onTap: () {
+                  articleSingleController.getArticleInfo(
+                      homeScreenController.topVisitedList[index].id);
+                },
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      16, 0, index == 0 ? bodyMargin : 16, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // poster blog
+                      Stack(
+                        children: [
+                          Container(
+                            foregroundDecoration: const BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(16)),
+                                gradient: LinearGradient(
+                                    colors: GradiantColors.blogPoster,
+                                    begin: Alignment.bottomCenter,
+                                    end: Alignment.center)),
+                            width: size.width / 2.4,
+                            height: size.height / 5.53,
+                            child: CachedNetworkImage(
+                              imageUrl: homeScreenController
+                                  .topVisitedList[index].image,
+                              imageBuilder: (context, imageProvider) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(16)),
+                                      image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: imageProvider)),
+                                );
+                              },
+                              placeholder: (context, url) =>
+                                  const SpinKitFadingCube(
+                                color: SolidColors.primryColor,
+                                size: 20,
                               ),
-                              Row(
-                                children: [
-                                  Text(
-                                    homeScreenController
-                                        .topVisitedList[index].view,
-                                    style: textTheme.bodyText1,
-                                  ),
-                                  const SizedBox(
-                                    width: 6,
-                                  ),
-                                  const Icon(
-                                    Icons.remove_red_eye,
-                                    size: 16,
-                                    color: Colors.white,
-                                  )
-                                ],
-                              )
-                            ],
+                              errorWidget: (context, url, error) => const Icon(
+                                Icons.image_not_supported_outlined,
+                                color: Colors.grey,
+                                size: 40,
+                              ),
+                            ),
                           ),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    // title blog
-                    SizedBox(
-                      width: size.width / 3,
-                      child: Text(
-                        homeScreenController.topVisitedList[index].title,
-                        style: textTheme.headline3,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
+                          Positioned(
+                            bottom: 8,
+                            left: 0,
+                            right: 0,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  homeScreenController
+                                      .topVisitedList[index].author,
+                                  style: textTheme.bodyText1,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      homeScreenController
+                                          .topVisitedList[index].view,
+                                      style: textTheme.bodyText1,
+                                    ),
+                                    const SizedBox(
+                                      width: 6,
+                                    ),
+                                    const Icon(
+                                      Icons.remove_red_eye,
+                                      size: 16,
+                                      color: Colors.white,
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          )
+                        ],
                       ),
-                    )
-                  ],
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      // title blog
+                      SizedBox(
+                        width: size.width / 3,
+                        child: Text(
+                          homeScreenController.topVisitedList[index].title,
+                          style: textTheme.headline3,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               );
-            }));
-      }),
-    );
+            })));
   }
 
   Widget podcastList() {

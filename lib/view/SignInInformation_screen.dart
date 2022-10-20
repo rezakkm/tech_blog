@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/models/fake_data.dart';
 import 'package:tech_blog/components/my_component.dart';
 import 'package:tech_blog/components/my_strings.dart';
+import '../controller/home_screen_controller.dart';
 import '../gen/assets.gen.dart';
 
 class SignInInfo extends StatefulWidget {
-  const SignInInfo({Key? key}) : super(key: key);
+  SignInInfo({Key? key}) : super(key: key);
 
   @override
   State<SignInInfo> createState() => _SignInInfoState();
 }
 
 class _SignInInfoState extends State<SignInInfo> {
+  HomeScreenController homeScreenController = Get.put(HomeScreenController());
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -62,7 +67,7 @@ class _SignInInfoState extends State<SignInInfo> {
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        childAspectRatio: 0.34,
+                        childAspectRatio: 0.4,
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 7,
                       ),
@@ -72,16 +77,17 @@ class _SignInInfoState extends State<SignInInfo> {
                           child: InkWell(
                               onTap: () {
                                 setState(() {
-                                  if (favTagList.contains(tagList[index]) ==
+                                  if (favTagList.contains(homeScreenController
+                                          .tagList[index]) ==
                                       false) {
-                                    favTagList.add(tagList[index]);
+                                    favTagList.add(
+                                        homeScreenController.tagList[index]);
                                   }
                                 });
                               },
                               child: SimpleOfTagList(
                                 size: size,
                                 index: index,
-                                biuldList: tagList,
                               )),
                         );
                       })),

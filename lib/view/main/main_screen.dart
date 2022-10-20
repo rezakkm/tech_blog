@@ -8,11 +8,11 @@ import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/components/my_colors.dart';
 import 'package:tech_blog/components/my_component.dart';
 
-import 'package:tech_blog/view/home_screen.dart';
-import 'package:tech_blog/view/profile_screen.dart';
-import 'package:tech_blog/view/rigester_intro.dart';
+import 'package:tech_blog/view/main/home_screen.dart';
+import 'package:tech_blog/view/main/profile_screen.dart';
+import 'package:tech_blog/view/main/rigester_intro.dart';
 
-import '../controller/home_screen_controller.dart';
+import '../../controller/home_screen_controller.dart';
 
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 

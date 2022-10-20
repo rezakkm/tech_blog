@@ -210,8 +210,8 @@ class CodeRigesterBottomSHeet extends StatelessWidget {
             ),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const SignInInfo()));
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => SignInInfo()));
                 },
                 child: const Text(
                   '   ادامه   ',

@@ -42,4 +42,9 @@ class GradiantColors {
     Color.fromARGB(70, 72, 20, 88),
     Color.fromARGB(0, 72, 20, 88),
   ];
+  static const List<Color> singlePoster = [
+    Color.fromARGB(255, 68, 4, 87),
+    Color.fromARGB(70, 25, 0, 94),
+    Color.fromARGB(0, 72, 20, 88),
+  ];
 }

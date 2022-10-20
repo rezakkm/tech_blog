@@ -1,5 +1,6 @@
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/models/data_models.dart';
+import 'package:tech_blog/models/tag_model.dart';
 
 Map homePagePosterMap = {
   "imageAsset": Assets.images.posterTest.path,
@@ -18,7 +19,7 @@ List<HashtagModel> tagList = [
   HashtagModel(title: 'فلاتر'),
   HashtagModel(title: 'فراگ'),
 ];
-List<HashtagModel> favTagList = [];
+List<TagModel> favTagList = [];
 List<BlogModel> blogList = [
   BlogModel(
       id: 1,
