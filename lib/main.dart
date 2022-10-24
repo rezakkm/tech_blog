@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:tech_blog/components/my_colors.dart';
 
-import 'package:tech_blog/view/main/home_screen.dart';
 import 'package:tech_blog/view/main/main_screen.dart';
-import 'package:tech_blog/view/single_article_screen.dart';
-import 'package:tech_blog/view/splash_screen.dart';
 
-import 'view/article_list_screen.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
+
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: SolidColors.statusBar,
     statusBarIconBrightness: Brightness.dark,

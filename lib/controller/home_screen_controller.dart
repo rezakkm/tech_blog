@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:tech_blog/components/my_api.dart';
 import 'package:tech_blog/models/article_model.dart';
-import 'package:tech_blog/models/fake_data.dart';
+
 import 'package:tech_blog/models/home_page_poster.dart';
 import 'package:tech_blog/models/podcast_model.dart';
 import 'package:tech_blog/models/tag_model.dart';

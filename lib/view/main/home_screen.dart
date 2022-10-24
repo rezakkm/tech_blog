@@ -5,15 +5,14 @@ import 'package:get/get.dart';
 import 'package:tech_blog/controller/article_list_controller.dart';
 import 'package:tech_blog/controller/article_single_controller.dart';
 import 'package:tech_blog/controller/home_screen_controller.dart';
-import 'package:tech_blog/services/dio_service.dart';
-import 'package:tech_blog/view/article_list_screen.dart';
+
+import 'package:tech_blog/view/article/article_list_screen.dart';
 
 import '../../gen/assets.gen.dart';
 import '../../models/fake_data.dart';
 import '../../components/my_colors.dart';
-import '../../components/my_component.dart';
+
 import '../../components/my_strings.dart';
-import '../single_article_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreenController homeScreenController = Get.put(HomeScreenController());
@@ -317,7 +316,7 @@ class HomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
+                      SizedBox(
                         width: size.width / 3.16,
                         height: size.height / 5.8,
                         child: CachedNetworkImage(

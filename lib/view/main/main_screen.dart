@@ -10,9 +10,7 @@ import 'package:tech_blog/components/my_component.dart';
 
 import 'package:tech_blog/view/main/home_screen.dart';
 import 'package:tech_blog/view/main/profile_screen.dart';
-import 'package:tech_blog/view/main/rigester_intro.dart';
-
-import '../../controller/home_screen_controller.dart';
+import 'package:tech_blog/view/main/signIn/rigester_intro.dart';
 
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 

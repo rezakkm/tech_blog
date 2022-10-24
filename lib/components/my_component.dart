@@ -29,6 +29,7 @@ class TechDivider extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class SimpleOfTagList extends StatelessWidget {
   HomeScreenController homeScreenController = Get.put(HomeScreenController());
   SimpleOfTagList({
@@ -54,7 +55,7 @@ class SimpleOfTagList extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
         child: Row(
           children: [
-            SizedBox(
+            const SizedBox(
               width: 5,
             ),
             ImageIcon(
