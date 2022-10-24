@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings
 
 import 'dart:developer';
+import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,8 @@ import 'package:tech_blog/components/my_api.dart';
 import 'package:tech_blog/components/storage_const.dart';
 import 'package:tech_blog/services/dio_service.dart';
 import 'package:tech_blog/view/main/main_screen.dart';
+
+import '../view/main/signIn/rigester_intro.dart';
 
 class RegisterController extends GetxController {
   TextEditingController emailTextEditingController = TextEditingController();
@@ -49,6 +52,14 @@ class RegisterController extends GetxController {
       Get.to(() => MainScreen());
     } else {
       log('error');
+    }
+  }
+
+  checkLogIn() {
+    if (GetStorage().read(storageToken) == null) {
+      Get.to(() => RigesterIntro());
+    } else {
+      debugPrint(r'you are LogIn');
     }
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -12,15 +14,12 @@ class RigesterIntro extends StatelessWidget {
   RegisterController registerController = Get.put(RegisterController());
   RigesterIntro({
     Key? key,
-    required this.size,
-    required this.textTheme,
   }) : super(key: key);
-
-  final Size size;
-  final TextTheme textTheme;
 
   @override
   Widget build(BuildContext context) {
+    var textTheme = Theme.of(context).textTheme;
+    var size = MediaQuery.of(context).size;
     return Scaffold(
         body: Center(
       child: Column(children: [

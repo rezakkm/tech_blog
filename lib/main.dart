@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -8,7 +10,10 @@ import 'package:tech_blog/view/main/main_screen.dart';
 
 import 'package:get_storage/get_storage.dart';
 
+import 'my_http_overrides.dart';
+
 void main() async {
+  HttpOverrides.global = MyHttpOverrides();
   await GetStorage.init();
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
