@@ -10,6 +10,8 @@ import 'package:tech_blog/components/storage_const.dart';
 import 'package:tech_blog/services/dio_service.dart';
 import 'package:tech_blog/view/main/main_screen.dart';
 
+import '../view/main/signIn/rigester_intro.dart';
+
 class RegisterController extends GetxController {
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController activeCodeTextEditingController =
@@ -49,6 +51,14 @@ class RegisterController extends GetxController {
       Get.to(() => MainScreen());
     } else {
       log('error');
+    }
+  }
+
+  checkLogIn() {
+    if (GetStorage().read(storageToken) == null) {
+      Get.to(() => RigesterIntro());
+    } else {
+      debugPrint(r'you are LogIn');
     }
   }
 }

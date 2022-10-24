@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:tech_blog/components/my_strings.dart';
+import 'package:tech_blog/controller/register_controller.dart';
 
 import 'package:tech_blog/gen/assets.gen.dart';
 
@@ -144,8 +145,8 @@ class MainScreen extends StatelessWidget {
   }
 }
 
-class NavigationBar extends StatefulWidget {
-  const NavigationBar({
+class NavigationBar extends StatelessWidget {
+  NavigationBar({
     Key? key,
     required this.size,
     required this.changeScreen,
@@ -153,12 +154,7 @@ class NavigationBar extends StatefulWidget {
 
   final Size size;
   final Function(int) changeScreen;
-
-  @override
-  State<NavigationBar> createState() => _NavigationBarState();
-}
-
-class _NavigationBarState extends State<NavigationBar> {
+  RegisterController registerController = Get.put(RegisterController());
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -166,7 +162,7 @@ class _NavigationBarState extends State<NavigationBar> {
       left: 0,
       right: 0,
       child: Container(
-        height: widget.size.height / 5.9,
+        height: size.height / 5.9,
         decoration: const BoxDecoration(
             gradient: LinearGradient(
                 colors: GradiantColors.backgroundBottomNav,
@@ -176,11 +172,11 @@ class _NavigationBarState extends State<NavigationBar> {
         child: Stack(
           children: [
             Positioned(
-              bottom: widget.size.height / 40,
-              right: widget.size.width / 2 - widget.size.width / 2.74,
+              bottom: size.height / 40,
+              right: size.width / 2 - size.width / 2.74,
               child: Container(
-                width: widget.size.width / 1.37,
-                height: widget.size.height / 12.35,
+                width: size.width / 1.37,
+                height: size.height / 12.35,
                 decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     gradient: LinearGradient(colors: GradiantColors.bottomNav)),
@@ -189,7 +185,7 @@ class _NavigationBarState extends State<NavigationBar> {
                   children: [
                     IconButton(
                         onPressed: () {
-                          widget.changeScreen(0);
+                          changeScreen(0);
                         },
                         icon: ImageIcon(
                           Image.asset(
@@ -197,25 +193,21 @@ class _NavigationBarState extends State<NavigationBar> {
                           ).image,
                           color: Colors.white,
                         )),
+                    Obx(
+                      () => IconButton(
+                          onPressed: () {
+                            registerController.checkLogIn();
+                          },
+                          icon: ImageIcon(
+                            Image.asset(
+                              Assets.icons.write.path,
+                            ).image,
+                            color: Colors.white,
+                          )),
+                    ),
                     IconButton(
                         onPressed: () {
-                          setState(() {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => RigesterIntro(
-                                      size: MediaQuery.of(context).size,
-                                      textTheme: Theme.of(context).textTheme,
-                                    )));
-                          });
-                        },
-                        icon: ImageIcon(
-                          Image.asset(
-                            Assets.icons.write.path,
-                          ).image,
-                          color: Colors.white,
-                        )),
-                    IconButton(
-                        onPressed: () {
-                          widget.changeScreen(1);
+                          changeScreen(1);
                         },
                         icon: ImageIcon(
                           Image.asset(
