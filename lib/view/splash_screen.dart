@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tech_blog/components/my_component.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
+import 'package:tech_blog/main.dart';
 
 import 'package:tech_blog/view/main/main_screen.dart';
 
@@ -15,8 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 3)).then((value) {
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => MainScreen()));
+      Get.offAndToNamed(RouteNamed.mainScreen);
     });
     super.initState();
   }

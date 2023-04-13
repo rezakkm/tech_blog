@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/components/my_text_style.dart';
-import 'package:tech_blog/controller/article_list_controller.dart';
+import 'package:tech_blog/controller/article/article_list_controller.dart';
+import 'package:tech_blog/main.dart';
 
 import '../../components/my_colors.dart';
 import '../../components/my_component.dart';
-import '../../controller/article_single_controller.dart';
+import '../../controller/article/article_single_controller.dart';
 
 class ArticleListScreen extends StatelessWidget {
   final String title;
@@ -41,9 +42,10 @@ class ArticleListScreen extends StatelessWidget {
                     itemCount: articleListController.articleList.length,
                     itemBuilder: ((context, index) {
                       return GestureDetector(
-                        onTap: () {
-                          articleSingleController.getArticleInfo(
+                        onTap: () async {
+                          await articleSingleController.getArticleInfo(
                               articleListController.articleList[index].id);
+                          Get.toNamed(RouteNamed.singleArticleScreen);
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(16),

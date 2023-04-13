@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -11,7 +9,7 @@ import 'package:tech_blog/components/my_strings.dart';
 import 'package:validators/validators.dart';
 
 class RigesterIntro extends StatelessWidget {
-  RegisterController registerController = Get.put(RegisterController());
+  var registerController = Get.find<RegisterController>();
   RigesterIntro({
     Key? key,
   }) : super(key: key);
@@ -44,6 +42,7 @@ class RigesterIntro extends StatelessWidget {
         ElevatedButton(
           onPressed: () {
             showModalBottomSheet(
+                isDismissible: false,
                 isScrollControlled: true,
                 backgroundColor: Colors.transparent,
                 context: context,
@@ -141,6 +140,7 @@ class EmailRigesterBottomSheet extends StatelessWidget {
                   registerController.register();
                   Navigator.pop(context);
                   showModalBottomSheet(
+                      isDismissible: false,
                       isScrollControlled: true,
                       backgroundColor: Colors.transparent,
                       context: context,

@@ -9,21 +9,21 @@ import 'package:share_plus/share_plus.dart';
 import 'package:tech_blog/components/my_colors.dart';
 
 import 'package:tech_blog/components/my_text_style.dart';
-import 'package:tech_blog/controller/article_list_controller.dart';
-import 'package:tech_blog/controller/article_single_controller.dart';
+import 'package:tech_blog/controller/article/article_list_controller.dart';
+import 'package:tech_blog/controller/article/article_single_controller.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 
 import 'package:tech_blog/view/article/article_list_screen.dart';
 
 import '../../components/my_component.dart';
 
-class SingleArticleScreen extends StatelessWidget {
+class ArticleSingleScreen extends StatelessWidget {
   ArticleSingleController articleSingleController =
       Get.put(ArticleSingleController());
   ArticleListController articleListController =
       Get.put(ArticleListController());
 
-  SingleArticleScreen({super.key});
+  ArticleSingleScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -124,17 +124,17 @@ class SingleArticleScreen extends StatelessWidget {
                         child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount:
-                                articleSingleController.catArticle.length,
+                                articleSingleController.catsArticle.length,
                             itemBuilder: ((context, index) {
                               return GestureDetector(
                                   onTap: () {
                                     String catId = articleSingleController
-                                        .catArticle[index].id;
+                                        .catsArticle[index].id;
                                     articleListController
                                         .getArticleListWithCatId(catId);
 
                                     String title = articleSingleController
-                                        .catArticle[index].title;
+                                        .catsArticle[index].title;
                                     Get.to(
                                         () => ArticleListScreen(title: title));
                                   },
@@ -153,8 +153,8 @@ class SingleArticleScreen extends StatelessWidget {
                                             child: Center(
                                               child: Text(
                                                 articleSingleController
-                                                    .catArticle[index].title,
-                                                style: texttheme.overline,
+                                                    .catsArticle[index].title,
+                                                style: articleTextFont,
                                               ),
                                             )),
                                       )));

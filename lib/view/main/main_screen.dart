@@ -11,9 +11,8 @@ import 'package:tech_blog/components/my_component.dart';
 
 import 'package:tech_blog/view/main/home_screen.dart';
 import 'package:tech_blog/view/main/profile_screen.dart';
-import 'package:tech_blog/view/main/signIn/rigester_intro.dart';
 
-final GlobalKey<ScaffoldState> _key = GlobalKey();
+GlobalKey<ScaffoldState> _key = GlobalKey();
 
 class MainScreen extends StatelessWidget {
   RxInt selectedPageIndex = 0.obs;
@@ -154,7 +153,7 @@ class NavigationBar extends StatelessWidget {
 
   final Size size;
   final Function(int) changeScreen;
-  RegisterController registerController = Get.put(RegisterController());
+
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -174,6 +173,7 @@ class NavigationBar extends StatelessWidget {
             Positioned(
               bottom: size.height / 40,
               right: size.width / 2 - size.width / 2.74,
+              left: size.width / 2 - size.width / 2.74,
               child: Container(
                 width: size.width / 1.37,
                 height: size.height / 12.35,
@@ -193,18 +193,16 @@ class NavigationBar extends StatelessWidget {
                           ).image,
                           color: Colors.white,
                         )),
-                    Obx(
-                      () => IconButton(
-                          onPressed: () {
-                            registerController.checkLogIn();
-                          },
-                          icon: ImageIcon(
-                            Image.asset(
-                              Assets.icons.write.path,
-                            ).image,
-                            color: Colors.white,
-                          )),
-                    ),
+                    IconButton(
+                        onPressed: () {
+                          Get.find<RegisterController>().checkLogIn();
+                        },
+                        icon: ImageIcon(
+                          Image.asset(
+                            Assets.icons.write.path,
+                          ).image,
+                          color: Colors.white,
+                        )),
                     IconButton(
                         onPressed: () {
                           changeScreen(1);

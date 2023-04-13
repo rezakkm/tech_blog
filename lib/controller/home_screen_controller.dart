@@ -21,10 +21,11 @@ class HomeScreenController extends GetxController {
   }
 
   getHomeItems() async {
-    loading.value = true;
+    loading = true.obs;
     var response = await DioService().getService(MyApi.getHomeItems);
 
     if (response.statusCode == 200) {
+      print(response.statusCode);
       poster = HomePagePoster.fromJson(response.data["poster"]).obs;
       response.data['top_visited'].forEach((element) {
         topVisitedList.add(ArticleModel.fromJson(element));

@@ -47,12 +47,19 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/emtyState.png
+  AssetGenImage get emtyState =>
+      const AssetGenImage('assets/images/emtyState.png');
+
   /// File path: assets/images/logo-android12.png
   AssetGenImage get logoAndroid12 =>
       const AssetGenImage('assets/images/logo-android12.png');
 
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+
+  /// File path: assets/images/podcast.png
+  AssetGenImage get podcast => const AssetGenImage('assets/images/podcast.png');
 
   /// File path: assets/images/posterTest.png
   AssetGenImage get posterTest =>
@@ -61,6 +68,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/single_place_holder.jpg
   AssetGenImage get singlePlaceHolder =>
       const AssetGenImage('assets/images/single_place_holder.jpg');
+
+  /// File path: assets/images/write.png
+  AssetGenImage get write => const AssetGenImage('assets/images/write.png');
 }
 
 class Assets {

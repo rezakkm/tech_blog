@@ -166,3 +166,15 @@ Widget loading() {
     size: 32,
   );
 }
+
+Column LoadingPage(Size size) {
+  return Column(children: [
+    SizedBox(
+      height: size.height / 2.7,
+    ),
+    const SpinKitFadingCube(
+      color: SolidColors.primryColor,
+      size: 32,
+    )
+  ]);
+}

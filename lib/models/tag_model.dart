@@ -4,6 +4,7 @@ class TagModel {
 
   TagModel({
     required this.title,
+    required this.id,
   });
 
   TagModel.fromJson(Map<String, dynamic> element) {
